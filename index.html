@@ -1,0 +1,1056 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#090912">
+<title>MOHAMED MUSIC</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.7/jsmediatags.min.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+ --bg:#090912;
+ --panel:#151523;
+ --panel2:#201d30;
+ --purple:#a34bff;
+ --purple2:#7826d9;
+ --white:#f8f5ff;
+ --muted:#9290a8;
+ --border:#29263c;
+}
+
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:var(--white);
+ font-family:Alexandria,Arial,sans-serif;font-size:12px;
+}
+button,input{font-family:inherit}
+button{cursor:pointer;color:inherit}
+button:active{transform:scale(.96)}
+.hidden{display:none!important}
+
+.app{max-width:950px;margin:auto;padding:18px 16px 175px}
+
+.header{
+ display:flex;justify-content:space-between;align-items:center;
+ margin-bottom:24px;
+}
+.brand{font-size:19px;font-weight:800;direction:ltr}
+.brand span{color:var(--purple)}
+.header-actions{display:flex;gap:8px}
+.icon-btn{
+ width:38px;height:38px;border:0;border-radius:12px;
+ background:var(--panel2);font-size:17px;
+}
+
+.hero{
+ min-height:190px;border-radius:23px;padding:23px;
+ background:radial-gradient(circle at 5% 50%,#8b30eb 0%,transparent 42%),
+ linear-gradient(125deg,#30204c,#171426 65%,#11111d);
+ border:1px solid #483166;
+ display:flex;align-items:center;justify-content:space-between;
+ overflow:hidden;
+}
+.hero small{color:#d8b9ff;font-size:9px;letter-spacing:2px}
+.hero h1{font-size:22px;margin:12px 0 5px}
+.hero p{font-size:10px;color:#c5b6d8;margin-bottom:18px}
+.disc{
+ width:125px;height:125px;flex-shrink:0;border-radius:50%;
+ display:grid;place-items:center;font-size:58px;color:#d9a9ff;
+ border:1px solid #ffffff30;
+ background:repeating-radial-gradient(circle,#ffffff12 0 2px,transparent 3px 10px);
+ box-shadow:0 0 35px #a34bff44;
+}
+.primary{
+ background:linear-gradient(110deg,#bd65ff,#812bdf);
+ border:0;border-radius:12px;padding:11px 16px;
+ font-weight:700;font-size:10px;color:white;
+}
+.secondary{
+ background:var(--panel2);border:1px solid var(--border);
+ border-radius:10px;padding:10px 13px;font-size:10px;
+}
+
+.nav{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ gap:8px;margin:22px 0 26px;
+}
+.nav button{
+ background:var(--panel);border:1px solid transparent;
+ border-radius:13px;padding:11px 3px;
+ color:var(--muted);font-size:10px;
+}
+.nav button b{display:block;font-size:18px;margin-bottom:5px}
+.nav button.active{
+ color:#e0baff;background:#29193d;border-color:#7541a7;
+}
+
+.section-title{
+ display:flex;justify-content:space-between;
+ align-items:center;margin:23px 0 14px;
+}
+.section-title h2{font-size:14px;margin:0}
+.section-title small{color:var(--muted);font-size:9px}
+
+.search{
+ width:100%;padding:13px 15px;background:var(--panel);
+ border:1px solid var(--border);border-radius:12px;
+ color:white;outline:none;margin-bottom:14px;font-size:10px;
+}
+.search:focus{border-color:var(--purple)}
+
+.song{
+ display:flex;align-items:center;gap:11px;
+ background:var(--panel);padding:10px;
+ border:1px solid #222235;border-radius:14px;margin-bottom:9px;
+}
+.cover{
+ width:49px;height:49px;flex-shrink:0;
+ border-radius:11px;background:linear-gradient(140deg,#8139bc,#201a39);
+ display:grid;place-items:center;overflow:hidden;font-size:22px;
+}
+.cover img{width:100%;height:100%;object-fit:cover}
+.song-info{flex:1;min-width:0}
+.song-info strong{
+ display:block;font-size:10px;overflow:hidden;
+ white-space:nowrap;text-overflow:ellipsis;
+}
+.song-info small{display:block;color:var(--muted);font-size:9px;margin-top:5px}
+.song-actions{display:flex;gap:4px}
+.small-btn{
+ width:31px;height:31px;border:0;border-radius:9px;
+ background:#29243b;color:#dcbaff;font-size:14px;
+}
+.small-btn.play{background:var(--purple);color:white}
+.small-btn.liked{color:#ff66ae}
+
+.grid{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;
+}
+.album{min-width:0;cursor:pointer}
+.album-cover{
+ aspect-ratio:1;border-radius:15px;
+ background:linear-gradient(140deg,#a34bff,#1a1740);
+ display:grid;place-items:center;overflow:hidden;font-size:35px;
+}
+.album-cover img{width:100%;height:100%;object-fit:cover}
+.album strong{display:block;font-size:10px;margin-top:8px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.album small{color:var(--muted);font-size:9px}
+
+.empty{
+ background:var(--panel);border:1px dashed #45405b;
+ border-radius:16px;text-align:center;padding:35px 12px;
+ color:var(--muted);line-height:2.3;
+}
+.empty b{display:block;color:white;font-size:12px}
+
+.playlist{
+ background:var(--panel);border:1px solid var(--border);
+ border-radius:15px;padding:13px;display:flex;
+ align-items:center;gap:12px;margin-bottom:10px;
+}
+.playlist-cover{
+ width:55px;height:55px;flex-shrink:0;border-radius:12px;
+ display:grid;place-items:center;
+ background:linear-gradient(140deg,#9b43ec,#292044);font-size:25px;
+}
+.playlist-info{flex:1;min-width:0}
+.playlist-info b{font-size:11px}
+.playlist-info small{display:block;color:var(--muted);font-size:9px;margin-top:5px}
+
+.mini-player{
+ position:fixed;bottom:66px;left:10px;right:10px;
+ max-width:920px;margin:auto;background:#1a1727f5;
+ border:1px solid #49305e;border-radius:15px;padding:10px;
+ display:flex;align-items:center;gap:10px;z-index:20;
+ box-shadow:0 5px 30px #0008;backdrop-filter:blur(20px);
+}
+.mini-cover{
+ width:43px;height:43px;border-radius:10px;
+ background:#41235f;display:grid;place-items:center;
+ overflow:hidden;font-size:20px;flex-shrink:0;
+}
+.mini-cover img{width:100%;height:100%;object-fit:cover}
+.mini-info{flex:1;min-width:0}
+.mini-info b{display:block;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini-info small{font-size:9px;color:var(--muted)}
+.mini-controls{display:flex;align-items:center;gap:5px;direction:ltr}
+.mini-controls button{background:none;border:0;font-size:17px}
+.mini-controls .mini-play{
+ background:var(--purple);border-radius:50%;width:35px;height:35px;font-size:14px;
+}
+.mini-line{position:absolute;bottom:0;left:10px;right:10px;height:2px;background:#373045}
+.mini-line div{height:100%;width:0;background:var(--purple)}
+
+.bottom-nav{
+ position:fixed;bottom:0;left:0;width:100%;z-index:19;
+ background:#10101df5;border-top:1px solid var(--border);
+ display:grid;grid-template-columns:repeat(4,1fr);
+ padding:9px 5px 12px;backdrop-filter:blur(15px);
+}
+.bottom-nav button{border:0;background:none;color:var(--muted);font-size:9px}
+.bottom-nav button span{display:block;font-size:19px;margin-bottom:4px}
+.bottom-nav button.active{color:#c17bff}
+
+.full-player{
+ position:fixed;inset:0;z-index:50;padding:20px;
+ display:flex;flex-direction:column;
+ background:radial-gradient(ellipse at 50% 30%,#48215f,#171324 50%,#090912);
+}
+.fp-top{display:flex;justify-content:space-between;align-items:center}
+.fp-top button{
+ border:0;background:#ffffff12;width:38px;height:38px;
+ border-radius:50%;font-size:17px;
+}
+.fp-label{font-size:10px;color:#c7a1ec}
+.fp-art{
+ width:min(76vw,340px);aspect-ratio:1;margin:35px auto 25px;
+ border-radius:22px;background:linear-gradient(140deg,#a34bff,#1c1839);
+ box-shadow:0 15px 65px #a34bff35;
+ display:grid;place-items:center;font-size:100px;overflow:hidden;
+}
+.fp-art img{width:100%;height:100%;object-fit:cover}
+.fp-name{text-align:center;font-size:17px;font-weight:700}
+.fp-artist{text-align:center;color:var(--muted);font-size:10px;margin-top:8px}
+.fp-progress{margin-top:30px;direction:ltr}
+.fp-times{display:flex;justify-content:space-between;color:var(--muted);font-size:9px}
+.fp-progress input{width:100%;accent-color:var(--purple)}
+.fp-controls{display:flex;justify-content:center;align-items:center;gap:23px;margin:25px 0;direction:ltr}
+.fp-controls button{border:0;background:none;font-size:23px}
+.fp-controls .big{
+ width:65px;height:65px;border-radius:50%;
+ background:linear-gradient(140deg,#b85cff,#7927d6);font-size:24px;
+}
+.fp-extra{display:flex;justify-content:space-around}
+.fp-extra button{border:0;background:none;font-size:20px}
+.active-mode{color:#c276ff!important}
+
+.modal{
+ position:fixed;inset:0;background:#000b;z-index:70;
+ display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.modal-box{
+ width:100%;max-width:380px;background:#191725;
+ border:1px solid #49305d;border-radius:19px;padding:22px;
+}
+.modal-box h3{margin:0 0 17px;font-size:14px}
+.modal-box input{
+ width:100%;padding:13px;background:#10101c;
+ border:1px solid var(--border);color:white;
+ border-radius:10px;outline:none;margin-bottom:13px;
+}
+.modal-actions{display:flex;gap:9px}
+.modal-actions button{flex:1}
+select{
+ background:var(--panel2);color:white;border:1px solid var(--border);
+ border-radius:9px;padding:8px;font:inherit;font-size:10px;
+}
+.setting-row{
+ background:var(--panel);padding:15px;border-radius:12px;
+ display:flex;align-items:center;justify-content:space-between;
+ margin-bottom:9px;
+}
+
+@media(min-width:700px){
+ .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .app{padding-left:25px;padding-right:25px}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header class="header">
+ <div class="brand">MOHAMED <span>MUSIC</span></div>
+ <div class="header-actions">
+  <button class="icon-btn" onclick="focusSearch()">⌕</button>
+  <button class="icon-btn" onclick="showPage('settings')">⚙</button>
+ </div>
+</header>
+
+<section class="hero">
+ <div>
+  <small>YOUR MUSIC. YOUR WORLD.</small>
+  <h1>موسيقاك بطريقتك</h1>
+  <p>استمتع بموسيقاك في أي وقت ومن أي مكان.</p>
+  <button class="primary" onclick="document.getElementById('files').click()">＋ إضافة موسيقى</button>
+ </div>
+ <div class="disc">♫</div>
+</section>
+
+<input type="file" id="files" accept=".mp3,audio/mpeg" multiple hidden>
+<input type="file" id="folderFiles" webkitdirectory multiple hidden>
+
+<nav class="nav">
+ <button class="active" data-page="home" onclick="showPage('home')"><b>⌂</b>الرئيسية</button>
+ <button data-page="songs" onclick="showPage('songs')"><b>♫</b>الأغاني</button>
+ <button data-page="playlists" onclick="showPage('playlists')"><b>▤</b>القوائم</button>
+ <button data-page="favorites" onclick="showPage('favorites')"><b>♥</b>المفضلة</button>
+</nav>
+
+<section id="homePage" class="page">
+ <div class="section-title">
+  <h2>أضيف مؤخراً</h2><small id="homeCount">0 أغنية</small>
+ </div>
+ <div class="grid" id="recentGrid"></div>
+ <div class="section-title">
+  <h2>جميع الأغاني</h2>
+  <button class="secondary" onclick="showPage('songs')">عرض الكل ←</button>
+ </div>
+ <div id="homeSongs"></div>
+</section>
+
+<section id="songsPage" class="page hidden">
+ <div class="section-title">
+  <h2>مكتبة الأغاني</h2><small id="songCount">0 أغنية</small>
+ </div>
+ <input class="search" id="search" placeholder="⌕ ابحث باسم الأغنية أو الفنان..." oninput="renderSongs()">
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px">
+  <select id="sort" onchange="renderSongs()">
+   <option value="new">الأحدث أولاً</option>
+   <option value="name">الاسم</option>
+   <option value="artist">الفنان</option>
+  </select>
+  <button class="secondary" onclick="document.getElementById('folderFiles').click()">＋ استيراد مجلد</button>
+ </div>
+ <div id="allSongs"></div>
+</section>
+
+<section id="playlistsPage" class="page hidden">
+ <div class="section-title"><h2>قوائم التشغيل</h2></div>
+ <button class="primary" style="width:100%;margin-bottom:18px" onclick="openCreateModal()">＋ إنشاء قائمة جديدة</button>
+ <div id="playlistList"></div>
+ <div id="playlistDetail" class="hidden">
+  <div class="section-title">
+   <h2 id="detailTitle"></h2>
+   <button class="secondary" onclick="closePlaylist()">رجوع</button>
+  </div>
+  <div id="detailSongs"></div>
+ </div>
+</section>
+
+<section id="favoritesPage" class="page hidden">
+ <div class="section-title"><h2>الأغاني المفضلة ♥</h2></div>
+ <div id="favoriteSongs"></div>
+</section>
+
+<section id="settingsPage" class="page hidden">
+ <div class="section-title"><h2>الإعدادات</h2></div>
+ <div class="setting-row"><span>اسم التطبيق</span><b>MOHAMED MUSIC</b></div>
+ <div class="setting-row"><span>عدد الأغاني</span><b id="settingsCount">0</b></div>
+ <div class="setting-row"><span>المساحة المستخدمة</span><b id="storageCount">0 MB</b></div>
+ <button class="primary" style="width:100%;margin:10px 0" onclick="document.getElementById('files').click()">إضافة ملفات MP3</button>
+ <button class="secondary" style="width:100%" onclick="document.getElementById('folderFiles').click()">استيراد مجلد موسيقى</button>
+ <p style="color:var(--muted);line-height:2;margin-top:25px;font-size:10px">
+  MOHAMED MUSIC<br>الإصدار 3.0<br>مشغل موسيقى محلي
+ </p>
+</section>
+
+</div>
+
+<div class="mini-player hidden" id="miniPlayer" onclick="openFullPlayer()">
+ <div class="mini-cover" id="miniCover">♫</div>
+ <div class="mini-info">
+  <b id="miniTitle">لم يتم اختيار أغنية</b>
+  <small id="miniArtist">MOHAMED MUSIC</small>
+ </div>
+ <div class="mini-controls">
+  <button onclick="event.stopPropagation();previousSong()">⏮</button>
+  <button class="mini-play" id="miniPlay" onclick="event.stopPropagation();togglePlay()">▶</button>
+  <button onclick="event.stopPropagation();nextSong()">⏭</button>
+ </div>
+ <div class="mini-line"><div id="miniProgress"></div></div>
+</div>
+
+<div class="bottom-nav">
+ <button class="active" data-page="home" onclick="showPage('home')"><span>⌂</span>الرئيسية</button>
+ <button data-page="songs" onclick="showPage('songs')"><span>♫</span>المكتبة</button>
+ <button data-page="playlists" onclick="showPage('playlists')"><span>▤</span>القوائم</button>
+ <button data-page="favorites" onclick="showPage('favorites')"><span>♥</span>المفضلة</button>
+</div>
+
+<div id="fullPlayer" class="full-player hidden">
+ <div class="fp-top">
+  <button onclick="closeFullPlayer()">⌄</button>
+  <div class="fp-label">MOHAMED MUSIC</div>
+  <button onclick="toggleCurrentFavorite()" id="fpHeart">♡</button>
+ </div>
+ <div class="fp-art" id="fpArt">♫</div>
+ <div class="fp-name" id="fpName">لم يتم اختيار أغنية</div>
+ <div class="fp-artist" id="fpArtist">MOHAMED MUSIC</div>
+
+ <div class="fp-progress">
+  <div class="fp-times">
+   <span id="elapsed">0:00</span>
+   <span id="total">0:00</span>
+  </div>
+  <input type="range" id="progress" min="0" max="100" value="0">
+ </div>
+
+ <div class="fp-controls">
+  <button id="shuffleBtn" onclick="toggleShuffle()">⤨</button>
+  <button onclick="previousSong()">⏮</button>
+  <button class="big" id="fullPlay" onclick="togglePlay()">▶</button>
+  <button onclick="nextSong()">⏭</button>
+  <button id="repeatBtn" onclick="toggleRepeat()">↻</button>
+ </div>
+
+ <div class="fp-extra">
+  <button onclick="changeVolume(-0.1)">🔉</button>
+  <button onclick="changeVolume(0.1)">🔊</button>
+  <button onclick="openAddModal(currentSong?.id)">＋</button>
+ </div>
+</div>
+
+<div class="modal hidden" id="createModal">
+ <div class="modal-box">
+  <h3>إنشاء قائمة تشغيل</h3>
+  <input id="playlistName" placeholder="اسم القائمة...">
+  <div class="modal-actions">
+   <button class="primary" onclick="createPlaylist()">إنشاء</button>
+   <button class="secondary" onclick="hideModal('createModal')">إلغاء</button>
+  </div>
+ </div>
+</div>
+
+<div class="modal hidden" id="addModal">
+ <div class="modal-box">
+  <h3>إضافة إلى قائمة تشغيل</h3>
+  <div id="playlistChoices"></div>
+  <button class="secondary" style="width:100%;margin-top:12px" onclick="hideModal('addModal')">إغلاق</button>
+ </div>
+</div>
+
+<audio id="audio" preload="metadata"></audio>
+
+<script>
+const DB_NAME="MohamedMusicV3";
+const STORE="songs";
+
+let db;
+let songs=[];
+let playlists=JSON.parse(localStorage.getItem("mm3_playlists")||"[]");
+let favorites=JSON.parse(localStorage.getItem("mm3_favorites")||"[]");
+let currentSong=null;
+let currentList=[];
+let currentIndex=-1;
+let shuffle=false;
+let repeat=0;
+let pendingSong=null;
+let activePlaylist=null;
+let currentURL=null;
+
+const audio=document.getElementById("audio");
+
+function openDB(){
+ return new Promise((resolve,reject)=>{
+  const req=indexedDB.open(DB_NAME,1);
+  req.onupgradeneeded=e=>{
+   e.target.result.createObjectStore(STORE,{keyPath:"id"});
+  };
+  req.onsuccess=e=>{db=e.target.result;resolve()};
+  req.onerror=()=>reject(req.error);
+ });
+}
+
+function dbAction(action,data){
+ return new Promise((resolve,reject)=>{
+  const tx=db.transaction(STORE,action==="getAll"?"readonly":"readwrite");
+  const store=tx.objectStore(STORE);
+  let req=action==="getAll"?store.getAll():
+   action==="put"?store.put(data):store.delete(data);
+  req.onsuccess=()=>resolve(req.result);
+  req.onerror=()=>reject(req.error);
+ });
+}
+
+function formatTime(n){
+ if(!Number.isFinite(n))return "0:00";
+ return Math.floor(n/60)+":"+String(Math.floor(n%60)).padStart(2,"0");
+}
+
+function savePlaylists(){
+ localStorage.setItem("mm3_playlists",JSON.stringify(playlists));
+}
+function saveFavorites(){
+ localStorage.setItem("mm3_favorites",JSON.stringify(favorites));
+}
+
+function getCover(song){
+ if(!song?.art)return null;
+ return URL.createObjectURL(song.art);
+}
+
+function coverElement(song,cls="cover"){
+ const box=document.createElement("div");
+ box.className=cls;
+ if(song?.art){
+  const img=document.createElement("img");
+  img.src=getCover(song);
+  box.append(img);
+ }else box.textContent="♫";
+ return box;
+}
+
+function readTags(file){
+ return new Promise(resolve=>{
+  if(!window.jsmediatags){
+   resolve({});
+   return;
+  }
+  try{
+   window.jsmediatags.read(file,{
+    onSuccess:result=>{
+     const tags=result.tags||{};
+     let art=null;
+     if(tags.picture){
+      const p=tags.picture;
+      art=new Blob([new Uint8Array(p.data)],{type:p.format||"image/jpeg"});
+     }
+     resolve({
+      title:tags.title||"",
+      artist:tags.artist||"",
+      album:tags.album||"",
+      art
+     });
+    },
+    onError:()=>resolve({})
+   });
+  }catch(e){resolve({})}
+ });
+}
+
+async function importFiles(fileList){
+ const files=Array.from(fileList).filter(f=>
+  f.name.toLowerCase().endsWith(".mp3") ||
+  f.type==="audio/mpeg"
+ );
+ let added=0;
+
+ for(const file of files){
+  const exists=songs.some(s=>
+   s.name===file.name && s.size===file.size &&
+   s.lastModified===file.lastModified
+  );
+  if(exists)continue;
+
+  const tags=await readTags(file);
+  const filename=file.name.replace(/\.mp3$/i,"");
+
+  const song={
+   id:crypto.randomUUID(),
+   name:tags.title||filename,
+   artist:tags.artist||"فنان غير معروف",
+   album:tags.album||"",
+   fileName:file.name,
+   size:file.size,
+   lastModified:file.lastModified,
+   added:Date.now(),
+   blob:file,
+   art:tags.art||null
+  };
+
+  await dbAction("put",song);
+  songs.unshift(song);
+  added++;
+ }
+
+ renderAll();
+ if(added)alert("تم استيراد "+added+" أغنية بنجاح!");
+ else alert("لم تتم إضافة ملفات جديدة.");
+}
+
+document.getElementById("files").addEventListener("change",async e=>{
+ await importFiles(e.target.files);
+ e.target.value="";
+});
+
+document.getElementById("folderFiles").addEventListener("change",async e=>{
+ await importFiles(e.target.files);
+ e.target.value="";
+});
+
+function showPage(page){
+ document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
+ document.getElementById(page+"Page")?.classList.remove("hidden");
+
+ document.querySelectorAll("[data-page]").forEach(b=>{
+  b.classList.toggle("active",b.dataset.page===page);
+ });
+
+ if(page==="playlists")renderPlaylists();
+ if(page==="favorites")renderFavorites();
+ if(page==="songs")renderSongs();
+ if(page==="settings")updateSettings();
+}
+
+function focusSearch(){
+ showPage("songs");
+ setTimeout(()=>document.getElementById("search").focus(),100);
+}
+
+function songElement(song,list){
+ const row=document.createElement("div");
+ row.className="song";
+
+ row.append(coverElement(song));
+
+ const info=document.createElement("div");
+ info.className="song-info";
+
+ const title=document.createElement("strong");
+ title.textContent=song.name;
+
+ const sub=document.createElement("small");
+ sub.textContent=song.artist+" • "+(song.size/1048576).toFixed(1)+" MB";
+
+ info.append(title,sub);
+
+ const actions=document.createElement("div");
+ actions.className="song-actions";
+
+ const like=document.createElement("button");
+ like.className="small-btn"+(favorites.includes(song.id)?" liked":"");
+ like.textContent=favorites.includes(song.id)?"♥":"♡";
+ like.onclick=()=>toggleFavorite(song.id);
+
+ const add=document.createElement("button");
+ add.className="small-btn";
+ add.textContent="+";
+ add.onclick=()=>openAddModal(song.id);
+
+ const play=document.createElement("button");
+ play.className="small-btn play";
+ play.textContent="▶";
+ play.onclick=()=>playSong(song.id,list);
+
+ const del=document.createElement("button");
+ del.className="small-btn";
+ del.textContent="×";
+ del.title="حذف من المكتبة";
+ del.onclick=()=>deleteSong(song.id);
+
+ actions.append(like,add,play,del);
+ row.append(info,actions);
+ return row;
+}
+
+function renderSongs(){
+ const box=document.getElementById("allSongs");
+ box.innerHTML="";
+
+ const q=document.getElementById("search").value.toLowerCase();
+ const sort=document.getElementById("sort").value;
+
+ let filtered=songs.filter(s=>
+  (s.name+" "+s.artist+" "+s.album).toLowerCase().includes(q)
+ );
+
+ if(sort==="name")filtered.sort((a,b)=>a.name.localeCompare(b.name));
+ if(sort==="artist")filtered.sort((a,b)=>a.artist.localeCompare(b.artist));
+ if(sort==="new")filtered.sort((a,b)=>b.added-a.added);
+
+ document.getElementById("songCount").textContent=songs.length+" أغنية";
+
+ if(!filtered.length){
+  box.innerHTML='<div class="empty"><b>لا توجد أغاني</b>أضف ملفات MP3 إلى مكتبتك</div>';
+  return;
+ }
+
+ filtered.forEach(s=>box.append(songElement(s,filtered)));
+}
+
+function renderHome(){
+ const grid=document.getElementById("recentGrid");
+ const list=document.getElementById("homeSongs");
+
+ grid.innerHTML="";
+ list.innerHTML="";
+ document.getElementById("homeCount").textContent=songs.length+" أغنية";
+
+ songs.slice(0,6).forEach(song=>{
+  const card=document.createElement("div");
+  card.className="album";
+  const cover=document.createElement("div");
+  cover.className="album-cover";
+
+  if(song.art){
+   const img=document.createElement("img");
+   img.src=getCover(song);
+   cover.append(img);
+  }else cover.textContent="♫";
+
+  const title=document.createElement("strong");
+  title.textContent=song.name;
+
+  const artist=document.createElement("small");
+  artist.textContent=song.artist;
+
+  card.append(cover,title,artist);
+  card.onclick=()=>playSong(song.id,songs);
+  grid.append(card);
+ });
+
+ songs.slice(0,5).forEach(s=>list.append(songElement(s,songs)));
+
+ if(!songs.length){
+  grid.innerHTML='<div class="empty" style="grid-column:1/-1"><b>مرحباً بك في MOHAMED MUSIC</b>ابدأ بإضافة أغانيك</div>';
+ }
+}
+
+function renderPlaylists(){
+ const box=document.getElementById("playlistList");
+ box.innerHTML="";
+
+ if(!playlists.length){
+  box.innerHTML='<div class="empty"><b>لا توجد قوائم تشغيل</b>أنشئ قائمتك الموسيقية الأولى</div>';
+  return;
+ }
+
+ playlists.forEach(pl=>{
+  const row=document.createElement("div");
+  row.className="playlist";
+
+  const cover=document.createElement("div");
+  cover.className="playlist-cover";
+  cover.textContent="♫";
+
+  const info=document.createElement("div");
+  info.className="playlist-info";
+
+  const name=document.createElement("b");
+  name.textContent=pl.name;
+
+  const count=document.createElement("small");
+  count.textContent=pl.songs.length+" أغنية";
+
+  info.append(name,count);
+
+  const open=document.createElement("button");
+  open.className="small-btn";
+  open.textContent="›";
+  open.onclick=()=>openPlaylist(pl.id);
+
+  const del=document.createElement("button");
+  del.className="small-btn";
+  del.textContent="×";
+  del.onclick=()=>{
+   if(confirm("هل تريد حذف هذه القائمة؟")){
+    playlists=playlists.filter(p=>p.id!==pl.id);
+    savePlaylists();
+    renderPlaylists();
+   }
+  };
+
+  row.append(cover,info,open,del);
+  box.append(row);
+ });
+}
+
+function openCreateModal(){
+ document.getElementById("playlistName").value="";
+ document.getElementById("createModal").classList.remove("hidden");
+}
+
+function createPlaylist(){
+ const name=document.getElementById("playlistName").value.trim();
+ if(!name){alert("اكتب اسم القائمة");return}
+
+ playlists.push({id:crypto.randomUUID(),name,songs:[]});
+ savePlaylists();
+ hideModal("createModal");
+ renderPlaylists();
+}
+
+function openPlaylist(id){
+ activePlaylist=playlists.find(p=>p.id===id);
+ if(!activePlaylist)return;
+
+ document.getElementById("playlistList").classList.add("hidden");
+ document.getElementById("playlistDetail").classList.remove("hidden");
+ document.getElementById("detailTitle").textContent=activePlaylist.name;
+
+ const box=document.getElementById("detailSongs");
+ box.innerHTML="";
+
+ const items=activePlaylist.songs.map(id=>songs.find(s=>s.id===id)).filter(Boolean);
+
+ if(!items.length){
+  box.innerHTML='<div class="empty">هذه القائمة فارغة</div>';
+  return;
+ }
+
+ items.forEach(song=>{
+  const row=songElement(song,items);
+  const remove=document.createElement("button");
+  remove.className="small-btn";
+  remove.textContent="−";
+  remove.onclick=()=>{
+   activePlaylist.songs=activePlaylist.songs.filter(id=>id!==song.id);
+   savePlaylists();
+   openPlaylist(activePlaylist.id);
+   renderPlaylists();
+  };
+  row.querySelector(".song-actions").prepend(remove);
+  box.append(row);
+ });
+}
+
+function closePlaylist(){
+ document.getElementById("playlistList").classList.remove("hidden");
+ document.getElementById("playlistDetail").classList.add("hidden");
+ renderPlaylists();
+}
+
+function openAddModal(id){
+ pendingSong=id;
+ const box=document.getElementById("playlistChoices");
+ box.innerHTML="";
+
+ if(!playlists.length){
+  box.textContent="أنشئ قائمة تشغيل أولاً.";
+ }else{
+  playlists.forEach(pl=>{
+   const btn=document.createElement("button");
+   btn.className="secondary";
+   btn.style.cssText="width:100%;margin-bottom:8px;text-align:right";
+   btn.textContent="♫  "+pl.name;
+   btn.onclick=()=>{
+    if(!pl.songs.includes(pendingSong)){
+     pl.songs.push(pendingSong);
+     savePlaylists();
+     alert("تمت الإضافة!");
+    }else alert("الأغنية موجودة بالفعل");
+    hideModal("addModal");
+    renderPlaylists();
+   };
+   box.append(btn);
+  });
+ }
+
+ document.getElementById("addModal").classList.remove("hidden");
+}
+
+function hideModal(id){
+ document.getElementById(id).classList.add("hidden");
+}
+
+function toggleFavorite(id){
+ favorites=favorites.includes(id)?
+  favorites.filter(x=>x!==id):[...favorites,id];
+
+ saveFavorites();
+ renderAll();
+ updatePlayer();
+}
+
+function renderFavorites(){
+ const box=document.getElementById("favoriteSongs");
+ box.innerHTML="";
+
+ const items=favorites.map(id=>songs.find(s=>s.id===id)).filter(Boolean);
+
+ if(!items.length){
+  box.innerHTML='<div class="empty"><b>لا توجد أغاني مفضلة</b>أضف أغانيك باستخدام زر القلب</div>';
+  return;
+ }
+
+ items.forEach(s=>box.append(songElement(s,items)));
+}
+
+function toggleCurrentFavorite(){
+ if(currentSong)toggleFavorite(currentSong.id);
+}
+
+async function deleteSong(id){
+ const song=songs.find(s=>s.id===id);
+ if(!song)return;
+ if(!confirm("هل تريد حذف "+song.name+" من المكتبة؟"))return;
+
+ await dbAction("delete",id);
+ songs=songs.filter(s=>s.id!==id);
+ favorites=favorites.filter(x=>x!==id);
+
+ playlists.forEach(p=>p.songs=p.songs.filter(x=>x!==id));
+ saveFavorites();
+ savePlaylists();
+
+ if(currentSong?.id===id){
+  audio.pause();
+  audio.removeAttribute("src");
+  currentSong=null;
+  currentList=[];
+  currentIndex=-1;
+  document.getElementById("miniPlayer").classList.add("hidden");
+ }
+
+ renderAll();
+}
+
+function playSong(id,list){
+ const index=list.findIndex(s=>s.id===id);
+ if(index<0)return;
+
+ currentList=list;
+ currentIndex=index;
+ currentSong=list[index];
+
+ if(currentURL)URL.revokeObjectURL(currentURL);
+ currentURL=URL.createObjectURL(currentSong.blob);
+ audio.src=currentURL;
+
+ updatePlayer();
+ audio.play().catch(()=>{});
+}
+
+function updatePlayer(){
+ if(!currentSong)return;
+
+ document.getElementById("miniPlayer").classList.remove("hidden");
+ document.getElementById("miniTitle").textContent=currentSong.name;
+ document.getElementById("miniArtist").textContent=currentSong.artist;
+ document.getElementById("fpName").textContent=currentSong.name;
+ document.getElementById("fpArtist").textContent=currentSong.artist;
+
+ setCover("miniCover",currentSong);
+ setCover("fpArt",currentSong);
+
+ document.getElementById("fpHeart").textContent=
+ favorites.includes(currentSong.id)?"♥":"♡";
+}
+
+function setCover(id,song){
+ const box=document.getElementById(id);
+ box.innerHTML="";
+ if(song.art){
+  const img=document.createElement("img");
+  img.src=getCover(song);
+  box.append(img);
+ }else box.textContent="♫";
+}
+
+function togglePlay(){
+ if(!currentSong){alert("اختر أغنية أولاً");return}
+ if(audio.paused)audio.play().catch(()=>{});
+ else audio.pause();
+}
+
+function updateButtons(){
+ const symbol=audio.paused?"▶":"Ⅱ";
+ document.getElementById("miniPlay").textContent=symbol;
+ document.getElementById("fullPlay").textContent=symbol;
+}
+
+function nextSong(){
+ if(!currentList.length)return;
+
+ if(shuffle && currentList.length>1){
+  let next;
+  do{next=Math.floor(Math.random()*currentList.length)}
+  while(next===currentIndex);
+  currentIndex=next;
+ }else{
+  currentIndex++;
+  if(currentIndex>=currentList.length)currentIndex=0;
+ }
+
+ playSong(currentList[currentIndex].id,currentList);
+}
+
+function previousSong(){
+ if(!currentList.length)return;
+ if(audio.currentTime>3){audio.currentTime=0;return}
+ currentIndex--;
+ if(currentIndex<0)currentIndex=currentList.length-1;
+ playSong(currentList[currentIndex].id,currentList);
+}
+
+function toggleShuffle(){
+ shuffle=!shuffle;
+ document.getElementById("shuffleBtn").classList.toggle("active-mode",shuffle);
+}
+
+function toggleRepeat(){
+ repeat=(repeat+1)%3;
+ document.getElementById("repeatBtn").textContent=repeat===0?"↻":repeat===1?"↻¹":"↻²";
+ document.getElementById("repeatBtn").classList.toggle("active-mode",repeat!==0);
+}
+
+function changeVolume(amount){
+ audio.volume=Math.max(0,Math.min(1,audio.volume+amount));
+}
+
+function openFullPlayer(){
+ if(!currentSong)return;
+ document.getElementById("fullPlayer").classList.remove("hidden");
+ updatePlayer();
+}
+
+function closeFullPlayer(){
+ document.getElementById("fullPlayer").classList.add("hidden");
+}
+
+audio.addEventListener("play",updateButtons);
+audio.addEventListener("pause",updateButtons);
+
+audio.addEventListener("ended",()=>{
+ if(repeat===2){
+  audio.currentTime=0;
+  audio.play().catch(()=>{});
+ }else if(repeat===1){
+  nextSong();
+ }else if(currentIndex<currentList.length-1){
+  nextSong();
+ }else{
+  audio.pause();
+  audio.currentTime=0;
+ }
+});
+
+audio.addEventListener("timeupdate",()=>{
+ const percent=audio.duration?audio.currentTime/audio.duration*100:0;
+ document.getElementById("progress").value=percent;
+ document.getElementById("elapsed").textContent=formatTime(audio.currentTime);
+ document.getElementById("total").textContent=formatTime(audio.duration);
+ document.getElementById("miniProgress").style.width=percent+"%";
+});
+
+document.getElementById("progress").addEventListener("input",e=>{
+ if(audio.duration)audio.currentTime=audio.duration*Number(e.target.value)/100;
+});
+
+function updateSettings(){
+ document.getElementById("settingsCount").textContent=songs.length;
+ const bytes=songs.reduce((n,s)=>n+s.size,0);
+ document.getElementById("storageCount").textContent=(bytes/1048576).toFixed(1)+" MB";
+}
+
+function renderAll(){
+ renderHome();
+ renderSongs();
+ renderPlaylists();
+ renderFavorites();
+ updateSettings();
+}
+
+async function init(){
+ try{
+  await openDB();
+  songs=await dbAction("getAll");
+  songs.sort((a,b)=>b.added-a.added);
+  renderAll();
+ }catch(e){
+  console.error(e);
+  alert("تعذر فتح مكتبة الموسيقى. تأكد من دعم المتصفح لقاعدة IndexedDB.");
+ }
+}
+
+init();
+</script>
+</body>
+</html>
